@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('reservaForm');
     const empleadoSelect = document.getElementById('empleado');
+    const servicioSelect = document.getElementById('servicio');
     const fechaInput = document.getElementById('fecha');
     const horaSelect = document.getElementById('hora');
     const mensajeDiv = document.getElementById('mensaje');
@@ -23,6 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon: 'error',
                 title: 'Error',
                 text: 'Error al cargar empleados. Por favor, intente más tarde.',
+            });
+        });
+
+    // Cargar servicios
+    fetch('http://localhost:3000/api/reservas/servicios')
+        .then(response => response.json())
+        .then(servicios => {
+            servicios.forEach(servicio => {
+                const option = document.createElement('option');
+                option.value = servicio.id;
+                option.textContent = servicio.nombre;
+                servicioSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar servicios:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error al cargar servicios. Por favor, intente más tarde.',
             });
         });
 
@@ -62,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nombre = document.getElementById('nombre').value;
         const empleado_id = empleadoSelect.value;
+        const servicio_id = servicioSelect.value;
         const fecha = fechaInput.value;
         const hora = horaSelect.value;
 
@@ -71,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ cliente_nombre: nombre, empleado_id, fecha, hora }),
+                body: JSON.stringify({ cliente_nombre: nombre, empleado_id, servicio_id, fecha, hora }),
             });
 
             if (!response.ok) {
@@ -109,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const fecha = new Date(reserva.fecha);
                     const fechaFormateada = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
                     li.innerHTML = `
-                        Su reserva ${reserva.cliente_nombre} es con ${reserva.empleado_nombre} a las ${reserva.hora} horas del día ${fechaFormateada}
+                        Su reserva ${reserva.cliente_nombre} es con ${reserva.empleado_nombre} para el servicio "${reserva.servicio_nombre}" a las ${reserva.hora} horas del día ${fechaFormateada}
                         <button class="cancelar-btn" data-id="${reserva.id}">Cancelar</button>
                     `;
                     listaReservas.appendChild(li);

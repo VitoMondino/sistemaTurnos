@@ -1,4 +1,4 @@
--- -- Crear la base de datos
+-- -- Crear la base de datos si no existe
 -- CREATE DATABASE IF NOT EXISTS peluqueria_db;
 -- USE peluqueria_db;
 
@@ -8,15 +8,34 @@
 --     nombre VARCHAR(100) NOT NULL
 -- );
 
--- -- Crear tabla de reservas
+-- -- Crear tabla de servicios
+-- CREATE TABLE servicios (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     nombre VARCHAR(100) NOT NULL,
+--     descripcion TEXT
+-- );
+
+-- -- Crear tabla de reservas con relación a servicios
 -- CREATE TABLE reservas (
 --     id INT AUTO_INCREMENT PRIMARY KEY,
 --     cliente_nombre VARCHAR(100) NOT NULL,
 --     empleado_id INT NOT NULL,
+--     servicio_id INT NOT NULL,
 --     fecha DATE NOT NULL,
 --     hora TIME NOT NULL,
---     FOREIGN KEY (empleado_id) REFERENCES empleados(id)
+--     FOREIGN KEY (empleado_id) REFERENCES empleados(id),
+--     FOREIGN KEY (servicio_id) REFERENCES servicios(id)
 -- );
 
 -- -- Insertar empleados de ejemplo
 -- INSERT INTO empleados (nombre) VALUES ('Juan'), ('María');
+
+-- -- Insertar servicios de ejemplo
+-- INSERT INTO servicios (nombre, descripcion) VALUES 
+-- ('Corte de cabello', 'Corte de cabello para hombre'),
+-- ('Corte de cabello', 'Corte de cabello para mujer'),
+-- ('Peinado', 'Peinado para eventos especiales'),
+-- ('Coloración', 'Cambio de color de cabello'),
+-- ('Lavado y planchado', 'Lavado y planchado');
+
+

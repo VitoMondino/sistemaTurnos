@@ -13,6 +13,17 @@ router.get('/empleados', async (req, res, next) => {
   }
 });
 
+// Obtener todos los servicios
+router.get('/servicios', async (req, res, next) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM servicios');
+    res.json(rows);
+  } catch (error) {
+    console.error('Error al obtener servicios:', error);
+    next(error);
+  }
+});
+
 // Verificar disponibilidad
 router.get('/disponibilidad', async (req, res, next) => {
   const { fecha, empleado_id } = req.query;
@@ -34,11 +45,11 @@ router.get('/disponibilidad', async (req, res, next) => {
 
 // Registrar reserva
 router.post('/', async (req, res, next) => {
-  const { cliente_nombre, empleado_id, fecha, hora } = req.body;
+  const { cliente_nombre, empleado_id, servicio_id, fecha, hora } = req.body;
   try {
-    console.log('Datos recibidos:', { cliente_nombre, empleado_id, fecha, hora });
+    console.log('Datos recibidos:', { cliente_nombre, empleado_id, servicio_id, fecha, hora });
     
-    if (!cliente_nombre || !empleado_id || !fecha || !hora) {
+    if (!cliente_nombre || !empleado_id || !servicio_id || !fecha || !hora) {
       return res.status(400).json({ message: 'Faltan datos requeridos' });
     }
 
@@ -53,8 +64,8 @@ router.post('/', async (req, res, next) => {
     }
 
     const [result] = await db.query(
-      'INSERT INTO reservas (cliente_nombre, empleado_id, fecha, hora) VALUES (?, ?, ?, ?)',
-      [cliente_nombre, empleado_id, fecha, hora]
+      'INSERT INTO reservas (cliente_nombre, empleado_id, servicio_id, fecha, hora) VALUES (?, ?, ?, ?, ?)',
+      [cliente_nombre, empleado_id, servicio_id, fecha, hora]
     );
     res.status(201).json({ message: 'Reserva registrada', id: result.insertId });
   } catch (error) {
@@ -67,9 +78,10 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const [rows] = await db.query(`
-      SELECT r.id, r.cliente_nombre, r.fecha, r.hora, e.nombre AS empleado_nombre
+      SELECT r.id, r.cliente_nombre, r.fecha, r.hora, e.nombre AS empleado_nombre, s.nombre AS servicio_nombre
       FROM reservas r
       JOIN empleados e ON r.empleado_id = e.id
+      JOIN servicios s ON r.servicio_id = s.id
       ORDER BY r.fecha, r.hora
     `);
     res.json(rows);
