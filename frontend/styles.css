@@ -1,0 +1,173 @@
+/* Estilos Generales */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Títulos */
+h1, h2 {
+    color: #2c3e50;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: slideUp 0.5s ease forwards;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+input, select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d9e6;
+    background-color: #f9f9fb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1em;
+}
+
+input:focus, select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+/* Botón */
+button {
+    padding: 12px;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #357ABD;
+    transform: translateY(-3px);
+}
+
+/* Mensaje */
+#mensaje {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #eaf4ff;
+    border-left: 4px solid #4a90e2;
+    text-align: center;
+    color: #4a90e2;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Opciones de hora deshabilitadas */
+#hora option[disabled] {
+    color: #999;
+    font-style: italic;
+}
+
+/* Lista de Reservas */
+#listaReservas {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+#listaReservas li {
+    background-color: #f9f9fb;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#listaReservas li:hover {
+    background-color: #e0ecff;
+    transform: translateY(-2px);
+}
+
+/* Botón de cancelación */
+.cancelar-btn {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cancelar-btn:hover {
+    background-color: #ff4c4c;
+    transform: scale(1.1);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

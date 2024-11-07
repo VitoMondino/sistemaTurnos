@@ -1,0 +1,22 @@
+-- -- Crear la base de datos
+-- CREATE DATABASE IF NOT EXISTS peluqueria_db;
+-- USE peluqueria_db;
+
+-- -- Crear tabla de empleados
+-- CREATE TABLE empleados (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     nombre VARCHAR(100) NOT NULL
+-- );
+
+-- -- Crear tabla de reservas
+-- CREATE TABLE reservas (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     cliente_nombre VARCHAR(100) NOT NULL,
+--     empleado_id INT NOT NULL,
+--     fecha DATE NOT NULL,
+--     hora TIME NOT NULL,
+--     FOREIGN KEY (empleado_id) REFERENCES empleados(id)
+-- );
+
+-- -- Insertar empleados de ejemplo
+-- INSERT INTO empleados (nombre) VALUES ('Juan'), ('María');

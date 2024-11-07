@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Peluquería</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Reserva tu cita</h1>
+        <form id="reservaForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="empleado">Empleado:</label>
+            <select id="empleado" required></select>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" required>
+
+            <label for="hora">Hora:</label>
+            <select id="hora" required></select>
+
+            <button type="submit">Reservar</button>
+        </form>
+        <div id="mensaje"></div>
+
+        <h2>Mis Reservas</h2>
+        <ul id="listaReservas"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
